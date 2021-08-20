@@ -1311,13 +1311,14 @@ function fn()
 	menu()
     if gen == 4 then
         currseed = mdword(seed_off)
-        seed = mdword(seed_off)
+        seed = mdword(seed_off+0x4)
         fcurrseed = mdword(seed_off)
-        finitial = mdword(seed_off)
+        finitial = mdword(seed_off+0x4)
         advance = 0
             
         -- Detect initial seeding
-        if mdword(seed_off) == currseed then
+        if mdword(seed_off+0x4) == currseed then
+            print(format("%08X, %08X",mdword(seed_off+0x4),mdword(seed_off+0x4)))
             initial = mdword(seed_off)
             if currseed ~= 0x00000000 then
                 advance = 0
@@ -1334,7 +1335,7 @@ function fn()
             if fcurrseed ~= 0x00000000 then
                 while finitial ~= fcurrseed do
                     finitial = next(finitial, 0x41C6, 0x4E6D, 0x6073)
-                    initial = mdword(seed_off)
+                    initial = mdword(seed_off+0x4)
                     advance = advance + 1
                     if advance > 9999 then 
                         break
