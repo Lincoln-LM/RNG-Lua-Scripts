@@ -350,40 +350,40 @@ if version == 0x45414441 or version == 0x45415041 then
     gameint = 1
     if langbyte == 0x4A then  -- Check game language
         language = "JPN"
-        seed_off = 0x4260
-        delay_off = 0x4260
-        mt_off = 0x43BC
+        seed_off = 0x021C2348 + 0x4260
+        delay_off = 0x021C1EE4 + 0x4260
+        delay_off = 0x021030A8 + 0x43BC
         jpn_id_off = 0xA
     elseif langbyte == 0x45 then
         language = "USA"
-        seed_off = 0x2A00
-        delay_off = 0x2A00
-        mt_off = 0x2B00
+        seed_off = 0x021C2348 + 0x2A00
+        delay_off = 0x021C1EE4 + 0x2A00
+        mt_off = 0x021030A8 + 0x2B00
     elseif langbyte == 0x49 then
         language = "ITA"
-        seed_off = 0x2AE0
-        delay_off = 0x2AE0
-        mt_off = 0x2BE0
+        seed_off = 0x021C2348 + 0x2AE0
+        delay_off = 0x021C1EE4 + 0x2AE0
+        mt_off = 0x021030A8 + 0x2BE0
     elseif langbyte == 0x44 then
         language = "GER"
-        seed_off = 0x2B40
-        delay_off = 0x2B40
-        mt_off = 0x2C40
+        seed_off = 0x021C2348 + 0x2B40
+        delay_off = 0x021C1EE4 + 0x2B40
+        mt_off = 0x021030A8 + 0x2C40
     elseif langbyte == 0x46 then
         language = "FRE"
-        seed_off = 0x2B80
-        delay_off = 0x2B80
-        mt_off = 0x2C80
+        seed_off = 0x021C2348 + 0x2B80
+        delay_off = 0x021C1EE4 + 0x2B80
+        mt_off = 0x021030A8 + 0x2C80
     elseif langbyte == 0x53 then
         language = "SPA"
-        seed_off = 0x2BA0
-        delay_off = 0x2BA0
-        mt_off = 0x2CA0
+        seed_off = 0x021C2348 + 0x2BA0
+        delay_off = 0x021C1EE4 + 0x2BA0
+        mt_off = 0x021030A8 + 0x2CA0
     elseif langbyte == 0x4B then
         language = "KOR"
-        seed_off = 0
-        delay_off = 0
-        mt_off = 0
+        seed_off = 0x021C2348 + 0
+        delay_off = 0x021C1EE4 + 0
+        mt_off = 0x021030A8 + 0
     end
     if version == 0x45415041 then
         mt_off = mt_off + 0x8
@@ -396,39 +396,39 @@ elseif version == 0x454B5049 or version == 0x45475049 then
     gameint = 2
     if langbyte == 0x4A then  -- Check game language
         language = "JPN"
-        seed_off = 0
-        delay_off = 0
-        mt_off = 0
+        seed_off = 0x021D0AE8 + 0
+        delay_off = 0x021D0678 + 0
+        mt_off = 0x0210EC00 + 0
     elseif langbyte == 0x45 then
         language = "USA"
-        seed_off = 0xAC0
-        delay_off = 0xAC0
-        mt_off = 0xACC
+        seed_off = 0x021D0AE8 + 0xAC0
+        delay_off = 0x021D0678 + 0xAC0
+        mt_off = 0x0210EC00 + 0xACC
     elseif langbyte == 0x49 then
         language = "ITA"
-        seed_off = 0xA60
-        delay_off = 0xA60
-        mt_off = 0xA6C
+        seed_off = 0x021D0AE8 + 0xA60
+        delay_off = 0x021D0678 + 0xA60
+        mt_off = 0x0210EC00 + 0xA6C
     elseif langbyte == 0x44 then
         language = "GER"
-        seed_off = 0xAA0
-        delay_off = 0xAA0
-        mt_off = 0xAAC
+        seed_off = 0x021D0AE8 + 0xAA0
+        delay_off = 0x021D0678 + 0xAA0
+        mt_off = 0x0210EC00 + 0xAAC
     elseif langbyte == 0x46 then
         language = "FRE"
-        seed_off = 0xAE0
-        delay_off = 0xAE0
-        mt_off = 0xAEC
+        seed_off = 0x021D0AE8 + 0xAE0
+        delay_off = 0x021D0678 + 0xAE0
+        mt_off = 0x0210EC00 + 0xAEC
     elseif langbyte == 0x53 then
         language = "SPA"
-        seed_off = 0xAE0
-        delay_off = 0xAE0
-        mt_off = 0xAEC
+        seed_off = 0x021D0AE8 + 0xAE0
+        delay_off = 0x021D0678 + 0xAE0
+        mt_off = 0x0210EC00 + 0xAEC
     elseif langbyte == 0x4B then
         language = "KOR"
-        seed_off = 0x14C0
-        delay_off = 0x14C0
-        mt_off = 0x14A0
+        seed_off = 0x021D0AE8 + 0x14C0
+        delay_off = 0x021D0678 + 0x14C0
+        mt_off = 0x0210EC00 + 0x14A0
     end
     if version == 0x45475049 then
         if language == "SPA" then
@@ -445,39 +445,39 @@ elseif version == 0x45555043 then
     gameint = 3
     if langbyte == 0x4A then  -- Check game language
         language = "JPN"
-        seed_off = 0
+        seed_off = 0x021BEF14 + 0
         delay_off = 0
-        mt_off = 0
+        mt_off = 0x020FFC28 + 0
     elseif langbyte == 0x45 then
         language = "USA"
-        seed_off = 0xC00
+        seed_off = 0x021BEF14 + 0xC00
         delay_off = 0xC00
-        mt_off = 0xC08
+        mt_off = 0x020FFC28 + 0xC08
     elseif langbyte == 0x49 then
         language = "ITA"
-        seed_off = 0xD60
+        seed_off = 0x021BEF14 + 0xD60
         delay_off = 0xD60
-        mt_off = 0xD68
+        mt_off = 0x020FFC28 + 0xD68
     elseif langbyte == 0x44 then
         language = "GER"
-        seed_off = 0xDA0
+        seed_off = 0x021BEF14 + 0xDA0
         delay_off = 0xDA0
-        mt_off = 0xDA8
+        mt_off = 0x020FFC28 + 0xDA8
     elseif langbyte == 0x46 then
         language = "FRE"
-        seed_off = 0xDE0
+        seed_off = 0x021BEF14 + 0xDE0
         delay_off = 0xDE0
-        mt_off = 0xDE8
+        mt_off = 0x020FFC28 + 0xDE8
     elseif langbyte == 0x53 then
         language = "SPA"
-        seed_off = 0xE00
+        seed_off = 0x021BEF14 + 0xE00
         delay_off = 0xE00
-        mt_off = 0xE08
+        mt_off = 0x020FFC28 + 0xE08
     elseif langbyte == 0x4B then
         language = "KOR"
-        seed_off = 0x1B00
+        seed_off = 0x021BEF14 + 0x1B00
         delay_off = 0x1B00
-        mt_off = 0x1AE8
+        mt_off = 0x020FFC28 + 0x1AE8
     end
     id_pointer = 0x021BFB94 + seed_off
     id_off = 0x8C
@@ -1151,7 +1151,7 @@ function decryptPokemon()
    end
 
 function buildseed()
-	delay=mdword(0x021BF6A8+delay_off)+21
+	delay=mdword(delay_off)+21
 	timehex=mdword(0x023FFDEC)
 	datehex=mdword(0x023FFDE8)
 	hour=format("%02X",(timehex%0x100)%0x40)	-- memory stores as decimal, but Lua reads as hex. Convert.
@@ -1310,15 +1310,15 @@ print(format("%08X",pointer))
 function fn()
 	menu()
     if gen == 4 then
-        currseed = mdword(0x021BFB14+seed_off)
-        seed = mdword(0x021BFB18+seed_off)
-        fcurrseed = mdword(0x021BFB14+seed_off)
-        finitial = mdword(0x021BFB18+seed_off)
+        currseed = mdword(seed_off)
+        seed = mdword(seed_off)
+        fcurrseed = mdword(seed_off)
+        finitial = mdword(seed_off)
         advance = 0
             
         -- Detect initial seeding
-        if mdword(0x021BFB18+seed_off) == currseed then
-            initial = mdword(0x021BFB14+seed_off)
+        if mdword(seed_off) == currseed then
+            initial = mdword(seed_off)
             if currseed ~= 0x00000000 then
                 advance = 0
                 iadvance = 0
@@ -1334,7 +1334,7 @@ function fn()
             if fcurrseed ~= 0x00000000 then
                 while finitial ~= fcurrseed do
                     finitial = next(finitial, 0x41C6, 0x4E6D, 0x6073)
-                    initial = mdword(0x021BFB18+seed_off)
+                    initial = mdword(seed_off)
                     advance = advance + 1
                     if advance > 9999 then 
                         break
@@ -1344,10 +1344,10 @@ function fn()
         end
             
         -- IRNG Advance Counting
-        if mdword(0x02100834+mt_off) >= 624 then
+        if mdword(mt_off) >= 624 then
             iadvance = 0
         else
-            iadvance = mdword(0x02100834+mt_off)
+            iadvance = mdword(mt_off)
         end
     elseif gen >= 5 then
         if mdword(prngAddr) ~= 0 and initSet == 0 then
@@ -1468,7 +1468,7 @@ function fn()
                 text(10,yfix+30,format("IVRNG Advance: %d", iadvance))
                 text(10,yfix+40,format("PIDRNG Advance: %d", advance))
                 if advance == 0 then
-                    text(10,yfix+50,format("Delay: %d", mdword(0x021BF6A8+delay_off)+21))
+                    text(10,yfix+50,format("Delay: %d", mdword(delay_off)+21))
                     text(10,yfix+60,format("Next Seed: %08X", buildseed()))
                 end
             else
