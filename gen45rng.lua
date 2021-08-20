@@ -1,4 +1,4 @@
--- Gen 4/5 pokemon info view/rng script, multi language support for BW/B2W2 but not gen 4 (yet)
+-- Gen 4/5 pokemon info view/rng script with multi language support
 -- Credit to Real.96 and the N.O.O.B./DevonStudios Team for the data tables, many of the rng addresses, and functions for decrypting pokemon in ram
 -- edit the "controls" table to change which buttons do what
 
@@ -267,6 +267,7 @@ local gameint = 1
 local gen = 4
 local yfix = -185
 local game,seed_off,delay_off,mt_off,id_off
+local jpn_id_off = 0
 local delay = 0
 local initSeedHigh = 0
 local initSeedLow = 0
@@ -321,45 +322,11 @@ local mbyte=memory.readbyteunsigned
 local box = gui.box
 local text = gui.text
 
--- Detect Game Version, Gen 4 needs language support
+-- Detect Game Version and language
 local version = mdword(0x02FFFE0C)
-if version == 0x45414441 then
-    game = 'D'
-    gameint = 1
-    seed_off = 0x5234	-- Initial/Current Seed
-    delay_off = 0x523C	-- Delay
-    mt_off = 0x5374	-- IVRNG Advance
-    id_off = 0xE82C -- TIDSID
-elseif version == 0x45415041 then
-    game = 'P'
-    gameint = 1
-    seed_off = 0x5234	-- Initial/Current Seed
-    delay_off = 0x523C	-- Delay
-    mt_off = 0x537C	-- IVRNG Advance
-    id_off = 0xE82C -- TIDSID
-elseif version == 0x454B5049 then
-    game = 'HG'
-    gameint = 2
-    seed_off = 0x11A94	-- Initial/Current Seed
-    delay_off = 0x11A90	-- Delay
-    mt_off = 0xEE98	-- IVRNG Advance
-    id_off = 0xD064 -- TIDSID
-elseif version == 0x45475049 then
-    game = 'SS'
-    gameint = 2
-    seed_off = 0x11A94	-- Initial/Current Seed
-    delay_off = 0x11A90	-- Delay
-    mt_off = 0xEE98	-- IVRNG Advance
-    id_off = 0xD064 -- TIDSID
-elseif version == 0x45555043 then
-    game = 'Pt'
-    gameint = 3
-    seed_off = 0			-- Initial/Current Seed
-    delay_off = 0		-- Delay
-    mt_off = 0		-- IVRNG Advance
-    id_off = 0xD06C -- TIDSID
+local langbyte = mbyte(0x02FFFE0F)
 
-elseif version == 0x4F425249 then
+if version == 0x4F425249 then
     game = "B"
     gameint = 4
     gen = 5
@@ -377,8 +344,145 @@ elseif version == 0x4F445249 then
     gen = 5.5
 end
 
-langbyte = mbyte(0x02FFFE0F)
-if gen == 5 then
+
+if version == 0x45414441 or version == 0x45415041 then
+    game = "DP"
+    gameint = 1
+    if langbyte == 0x4A then  -- Check game language
+        language = "JPN"
+        seed_off = 0x4260
+        delay_off = 0x4260
+        mt_off = 0x43BC
+        jpn_id_off = 0xA
+    elseif langbyte == 0x45 then
+        language = "USA"
+        seed_off = 0x2A00
+        delay_off = 0x2A00
+        mt_off = 0x2B00
+    elseif langbyte == 0x49 then
+        language = "ITA"
+        seed_off = 0x2AE0
+        delay_off = 0x2AE0
+        mt_off = 0x2BE0
+    elseif langbyte == 0x44 then
+        language = "GER"
+        seed_off = 0x2B40
+        delay_off = 0x2B40
+        mt_off = 0x2C40
+    elseif langbyte == 0x46 then
+        language = "FRE"
+        seed_off = 0x2B80
+        delay_off = 0x2B80
+        mt_off = 0x2C80
+    elseif langbyte == 0x53 then
+        language = "SPA"
+        seed_off = 0x2BA0
+        delay_off = 0x2BA0
+        mt_off = 0x2CA0
+    elseif langbyte == 0x4B then
+        language = "KOR"
+        seed_off = 0
+        delay_off = 0
+        mt_off = 0
+    end
+    if version == 0x45415041 then
+        mt_off = mt_off + 0x8
+    end
+    id_pointer = 0x021C2FC8 + seed_off + jpn_id_off
+    id_off = 0x288
+    
+elseif version == 0x454B5049 or version == 0x45475049 then
+    game = "HGSS"
+    gameint = 2
+    if langbyte == 0x4A then  -- Check game language
+        language = "JPN"
+        seed_off = 0
+        delay_off = 0
+        mt_off = 0
+    elseif langbyte == 0x45 then
+        language = "USA"
+        seed_off = 0xAC0
+        delay_off = 0xAC0
+        mt_off = 0xACC
+    elseif langbyte == 0x49 then
+        language = "ITA"
+        seed_off = 0xA60
+        delay_off = 0xA60
+        mt_off = 0xA6C
+    elseif langbyte == 0x44 then
+        language = "GER"
+        seed_off = 0xAA0
+        delay_off = 0xAA0
+        mt_off = 0xAAC
+    elseif langbyte == 0x46 then
+        language = "FRE"
+        seed_off = 0xAE0
+        delay_off = 0xAE0
+        mt_off = 0xAEC
+    elseif langbyte == 0x53 then
+        language = "SPA"
+        seed_off = 0xAE0
+        delay_off = 0xAE0
+        mt_off = 0xAEC
+    elseif langbyte == 0x4B then
+        language = "KOR"
+        seed_off = 0x14C0
+        delay_off = 0x14C0
+        mt_off = 0x14A0
+    end
+    if version == 0x45475049 then
+        if language == "SPA" then
+            seed_off = seed_off + 0x20
+            delay_off = delay_off + 0x20
+            mt_off = mt_off + 0x20
+        end
+    end
+    id_pointer = 0x021D1768 + seed_off
+    id_off = 0x84
+
+elseif version == 0x45555043 then
+    game = "Pt"
+    gameint = 3
+    if langbyte == 0x4A then  -- Check game language
+        language = "JPN"
+        seed_off = 0
+        delay_off = 0
+        mt_off = 0
+    elseif langbyte == 0x45 then
+        language = "USA"
+        seed_off = 0xC00
+        delay_off = 0xC00
+        mt_off = 0xC08
+    elseif langbyte == 0x49 then
+        language = "ITA"
+        seed_off = 0xD60
+        delay_off = 0xD60
+        mt_off = 0xD68
+    elseif langbyte == 0x44 then
+        language = "GER"
+        seed_off = 0xDA0
+        delay_off = 0xDA0
+        mt_off = 0xDA8
+    elseif langbyte == 0x46 then
+        language = "FRE"
+        seed_off = 0xDE0
+        delay_off = 0xDE0
+        mt_off = 0xDE8
+    elseif langbyte == 0x53 then
+        language = "SPA"
+        seed_off = 0xE00
+        delay_off = 0xE00
+        mt_off = 0xE08
+    elseif langbyte == 0x4B then
+        language = "KOR"
+        seed_off = 0x1B00
+        delay_off = 0x1B00
+        mt_off = 0x1AE8
+    end
+    id_pointer = 0x021BFB94 + seed_off
+    id_off = 0x8C
+
+elseif gen == 5 then
     if langbyte == 0x4A then  -- Check game language
         language = "JPN"
         prngAddr = 0x02216084
@@ -1339,11 +1443,13 @@ function fn()
         -- 7th Party Page
         elseif sub == 7 then
             if gen == 4 then
-                sid = floor(mdword(pointer+id_off) / 0x10000)
-                tid = mdword(pointer+id_off) % 0x10000
+                ids = mdword(mdword(id_pointer) + id_off)
+                sid = floor(ids / 0x10000)
+                tid = ids % 0x10000
             else
-                sid = floor(mdword(idsAddr) / 0x10000)
-                tid = mdword(idsAddr) % 0x10000
+                ids = mdword(idsAddr)
+                sid = floor(ids / 0x10000)
+                tid = ids % 0x10000
             end
             text(10,yfix+10, format("TID: %05d",tid))
             text(10,yfix+20, format("SID: %05d",sid))
