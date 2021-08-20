@@ -1442,7 +1442,7 @@ function fn()
                 text(10,yfix+110,format("SPE IV:  %02d%s",speiv,getNatSign("spe")), getIVClr(speiv))
             end
         -- 7th Party Page
-        elseif sub == 7 then
+        elseif sub == 7 and view == 1 then
             if gen == 4 then
                 ids = mdword(mdword(id_pointer) + id_off)
                 sid = floor(ids / 0x10000)
