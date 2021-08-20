@@ -1405,6 +1405,7 @@ function fn()
         box(5,yfix-5,145,yfix+128,"#000000A0", "white")
         text(10,yfix, format("%s %s",views[view],substr), "white")
         text(128-((string.len(game)/2)*6),yfix, game, "green")
+        text(128-((string.len(language)/2)*6),yfix+10, language, "green")
         if view < 6 and sub < 7 then
             decryptPokemon()
             if pokemonID == -1 then
